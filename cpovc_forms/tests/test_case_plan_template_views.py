@@ -12,6 +12,8 @@ from cpovc_registry.models import RegPerson
 from cpovc_forms.models import OVCCareEvents, OVCCareCasePlan
 from cpovc_ovc.models import OVCFacility, OVCHHMembers, OVCHouseHold
 
+from cpovc_forms.views import case_plan_template()
+
 user_model = get_user_model()
 
 class TestOVCCareCasePlanViews(TestCase):
@@ -40,3 +42,20 @@ class TestOVCCareCasePlanViews(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(200, response.status_code)
         self.assertTemplateUsed(response, 'forms/new_hivscreeningtool.html')
+
+    def test_case_plan_template_post(self):
+        event = mommy.make(OVCCareEvents, person = self.person)
+
+
+        request = self.factory.post(
+            'forms/case_plan_template.html',
+            data={'form': form, 
+                  'init_data': init_data,
+                  'vals': vals,
+                  'caseplan_events': caseplan_events,
+                  'care_giver': care_giver}
+        )
+        view = case_plan_template()
+        response = view(request, pk=choice.question.id)
+        new_votes = Choice.objects.get(pk=choice.id).votes
+        self.assertEquals(votes, new_votes)
