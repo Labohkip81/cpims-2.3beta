@@ -107,4 +107,3 @@ class KMHFLFacilities(object):
             pass
 
 
-KMHFLFacilities().get_newest_facilities()

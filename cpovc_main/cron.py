@@ -87,3 +87,5 @@ CronManager().add_weekly(user='root', command=facilities_cmd, day=1, hour=0)
 viral_load_script = settings.BASE_DIR + 'utilities/auto_update_ovc_viralload.py'
 viralload_cmd = 'python' + viral_load_script + '>>' + cron_log_file
 CronManager().add_weekly(user='root', command=viralload_cmd, day=0, hour=0)
+
+# do rel import

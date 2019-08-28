@@ -135,4 +135,3 @@ class UpdateViralLoad(object):
 			pass
 
 
-UpdateViralLoad().loop_through_data()
